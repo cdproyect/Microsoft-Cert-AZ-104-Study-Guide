@@ -37,3 +37,12 @@ ARM templates files are made up the following elements:
 | functions | An optional section where you can define user-defined functions that are available within the template. User-defined functions can simplify your template when complicated expressions are used repeatedly in your template.
 | resources | A required section that defines the actual items you want to deploy or update in a resource group or a subscription.
 | output | An optional section where you specify the values that will be returned at the end of the deployment.
+
+## Guidance
+
+The following suggestions help you take full advantage of ARM when working with your solutions:
+- Define and deploy your infrastructure through the declarative syntax in Azure Resource Manager templates, rather than through imperative commands.
+- Define all deoloyment and configuration steps in a template. you should have no manual steps for setting up your solution
+- Run imperative commands to manage your resources, such as to start or stop an app or maching
+- Arrange resources with the same lifecycle in a resource group. Use tags for all other organizing of resources.
+
