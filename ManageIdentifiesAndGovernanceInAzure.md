@@ -1,3 +1,52 @@
+- [Manage Identifies and Governance in Azure](#manage-identifies-and-governance-in-azure)
+  - [User Accounts](#user-accounts)
+    - [Manage User Accounts](#manage-user-accounts)
+      - [Permissions and roles](#permissions-and-roles)
+      - [Create bulk user accounts](#create-bulk-user-accounts)
+    - [Create group accounts](#create-group-accounts)
+      - [Access rights through single user or group assigment](#access-rights-through-single-user-or-group-assigment)
+    - [Adding members to groups](#adding-members-to-groups)
+    - [Create administrative units](#create-administrative-units)
+      - [Example for using administrative units](#example-for-using-administrative-units)
+      - [Considerations](#considerations)
+  - [Subscriptions](#subscriptions)
+    - [Azure accounts](#azure-accounts)
+    - [Types of Subscriptions](#types-of-subscriptions)
+    - [Plan and control expenses](#plan-and-control-expenses)
+    - [Apply resource tagging](#apply-resource-tagging)
+    - [Apply cost savings](#apply-cost-savings)
+  - [Azure Policy](#azure-policy)
+    - [Management Groups](#management-groups)
+      - [Adding management groups](#adding-management-groups)
+    - [Implement Azure policies](#implement-azure-policies)
+      - [Create Azure policies](#create-azure-policies)
+      - [Create policy definitions](#create-policy-definitions)
+      - [Create initiative definitions](#create-initiative-definitions)
+      - [Scope the initiative definition](#scope-the-initiative-definition)
+      - [Determine compliance](#determine-compliance)
+  - [Role-based access control](#role-based-access-control)
+    - [Overview of Role-based access control](#overview-of-role-based-access-control)
+      - [Examples of what can you do with Azure roles](#examples-of-what-can-you-do-with-azure-roles)
+      - [Concepts](#concepts)
+      - [Considerations](#considerations-1)
+      - [How does Azure RBAC work?](#how-does-azure-rbac-work)
+    - [Create a role definition](#create-a-role-definition)
+      - [Actions and NotActions](#actions-and-notactions)
+      - [Scope your role](#scope-your-role)
+    - [Create a role assignment](#create-a-role-assignment)
+    - [Compare Azure roles to Azure Active Directory roles](#compare-azure-roles-to-azure-active-directory-roles)
+    - [Apply role-based access control](#apply-role-based-access-control)
+    - [Determine role-based access control roles](#determine-role-based-access-control-roles)
+      - [Other things to know](#other-things-to-know)
+      - [Azure RBAC is an allow model](#azure-rbac-is-an-allow-model)
+    - [Self-Service password reset (SSPR) in Azure Active Directory](#self-service-password-reset-sspr-in-azure-active-directory)
+      - [How SSPR works](#how-sspr-works)
+      - [Authenticate a password reset](#authenticate-a-password-reset)
+      - [Require teh minimum number of authentication methods](#require-teh-minimum-number-of-authentication-methods)
+      - [Recommendations SSPR](#recommendations-sspr)
+      - [Accounts associated with administrator roles](#accounts-associated-with-administrator-roles)
+      - [Configure notifications](#configure-notifications)
+      - [License requirements](#license-requirements)
 # Manage Identifies and Governance in Azure
 
 ## User Accounts
@@ -14,6 +63,21 @@ Typically, Azure AD defines users in three ways:
 - **Microsoft 365 Admin Center**.
 - **Microsoft Intune admin console**.
 - **Azure CLI.**
+
+[tutorials](https://docs.microsoft.com/en-gb/learn/modules/create-users-and-groups-in-azure-active-directory/2-user-accounts-azure-ad)
+
+#### Permissions and roles
+
+There are different types of user accounts in Azure AD. Each type has a level of access specific to the scope of work expected to be done under each type of user account. Administrators have the highest level of access, followed by the member user accounts in the Azure AD organization. Guest users have the most restricted level of access.
+
+|Role | Description |
+| - | - |
+| Administrator roles | Administrator roles in Azure AD allow users elevated access to control who is allowed to do what. You assign these roles to a limited group of users to manage identity tasks in an Azure AD organization. You can assign administrator roles that allow a user to create or edit users, assign administrative roles to others, reset user passwords, manage user licenses, and more.
+| Member users | A member user account is a native member of the Azure AD organization that has a set of default permissions like being able to manage their profile information. When someone new joins your organization, they typically have this type of account created for them. Anyone who isn't a guest user or isn't assigned an administrator role falls into this type. A member user is meant for users who are considered internal to an organization and are members of the Azure AD organization. However, these users shouldn't be able to manage other users by, for example, creating and deleting users. Member users don't have the same restrictions that are typically placed on guest users.
+| Guest users | Guest users have restricted Azure AD organization permissions. When you invite someone to collaborate with your organization, you add them to your Azure AD organization as a guest user. Then you can either send an invitation email that contains a redemption link or send a direct link to an app you want to share. Guest users sign in with their own work, school, or social identities. By default, Azure AD member users can invite guest users. This default can be disabled by someone who has the User Administrator role.
+
+Your organization might need to work with an external partner. To collaborate with your organization, these partners often need to have a certain level of access to specific resources. For this sort of situation, it's a good idea to use guest user accounts. You'll then make sure partners have the right level of access to do their work, without having a higher level of access than they need.
+
 
 #### Create bulk user accounts
 
@@ -37,6 +101,16 @@ Azure AD allows you to define two different types of groups.
 
 - **Security groups.** Security groups are used to manage member and computer access to shared resources for a group of users. For example, you can create a security group for a specific security policy. By doing it this way, you can give a set of permissions to all the members at once, instead of having to add permissions to each member individually. This option requires an Azure AD administrator.
 - **Microsoft 365 groups.** Microsoft 365 groups provide collaboration opportunities by giving members access to a shared mailbox, calendar, files, SharePoint site, and more. You can give people outside of your organization access to the group. Both users and admins can use Microsoft 365 groups.
+
+#### Access rights through single user or group assigment
+
+Azure AD helps you provide access rights to a single user or to an entire group of users. You can assign a set of access permissions to all the members of the group. Access permissions range from full access to the ability to create or remove resources.
+
+There are different ways you can assign access rights:
+
+- **Direct assignment:** Assign a user the required access rights by directly assigning a role that has those access rights.
+- **Group assignment:** Assign a group the required access rights, and members of the group will inherit those rights.
+- **Rule-based assignment:** Use rules to determine a group membership based on user or device properties. For a user account or device's group membership to be valid, the user or device must meet the rules. If the rules aren't met, the user account or device's group membership is no longer valid. The rules can be simple. You can select prewritten rules or write your own advanced rules.
 
 ### Adding members to groups
 
@@ -213,6 +287,7 @@ Access management for cloud resources is a critical function for any organizatio
 
 Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management of resources in Azure.
 
+![azure-roles](img/azure-roles.png)
 #### Examples of what can you do with Azure roles
 
 Here are some examples of what you can do with Azure RBAC:
@@ -237,6 +312,15 @@ Here are some examples of what you can do with Azure RBAC:
 Using Azure RBAC, you can segregate duties within your team and grant only the amount of access to users that they need to perform their jobs. Instead of giving everybody unrestricted permissions in your Azure subscription or resources, you can allow only certain actions at a particular scope.
 
 When planning your access control strategy, it's a best practice to grant users the least privilege to get their work done.
+
+#### How does Azure RBAC work?
+
+You control access to resources using Azure RBAC by creating role assignments, which control how permissions are enforced. To create a role assignment, you need three elements: a security principal, a role definition, and a scope. You can think of these elements as "who", "what", and "where".
+
+1. Security principal (who)
+1. Role definition (what you can do)
+1. Scope (where)
+
 
 ### Create a role definition
 
@@ -298,3 +382,100 @@ Note
 Azure Resource Manager roles should be used instead of Classic administrator roles.
 
 ---</span>
+
+### Apply role-based access control
+
+RBAC includes many built-in roles, can be assigned at different scopes, and allows you to create your own custom roles. To manage resources in Azure AD, such as users, groups, and domains, there are several Azure AD administrator roles.
+
+The following diagram illustrates how Azure AD Admin roles are different from Azure RBAC roles. Azure AD Admin roles are used to manage resources in Azure AD, such as users, groups, and domains. Azure RBAC roles provide more fine-grained access management to Azure resources.
+
+![role-based-authentication](img/role-based-authentication.png)
+
+### Determine role-based access control roles
+
+Azure includes several built-in roles that you can use. There are four fundamental built-in roles. The first three apply to all resource types.
+
+- **Owner.** Has full access to all resources including the right to delegate access to others. The Service Administrator and Co-Administrators are assigned the Owner role at the subscription scope.
+- **Contributor.** Can create and manage all types of Azure resources but can’t grant access to others.
+- **Reader.** Can view existing Azure resources.
+- **User Access Administrator.** Lets you manage user access to Azure resources, rather than to managing resources.
+
+#### Other things to know
+
+- There are other built-in roles. For example, the Virtual Machine Contributor role allows a user to create and manage virtual machines.
+- When the built-in roles don't meet the specific needs of your organization, you can create your own custom roles.
+- Roles can grant access to data within an object. For example, if a user has read data access to a storage account, then they can read the blobs or messages in the storage account.
+
+#### Azure RBAC is an allow model
+
+Azure RBAC is an allow model. What this means is that when you are assigned a role, Azure RBAC allows you to perform certain actions, such as read, write, or delete. So, if one role assignment grants you read permissions to a resource group and a different role assignment grants you write permissions to the same resource group, you will have read and write permissions on that resource group.
+
+### Self-Service password reset (SSPR) in Azure Active Directory
+
+#### How SSPR works
+
+The user initiates a password reset either by going directly to the password reset portal or by selecting the Can't access your account link on a sign-in page. The reset portal takes these steps:
+
+1. Localization: The portal checks the browser's locale setting and renders the SSPR page in the appropriate language.
+1. Verification: The user enters their username and passes a captcha to ensure that it's a user and not a bot.
+1. Authentication: The user enters the required data to authenticate their identity. They might, for example, enter a code or answer security questions.
+1. Password reset: If the user passes the authentication tests, they can enter a new password and confirm it.
+1. Notification: A message is usually sent to the user to confirm the reset.
+
+There are several ways you can customize the SSPR user experience. For example, you can add your company logo to the sign-in page so users know that they're in the right place to reset their password.
+
+#### Authenticate a password reset
+
+It's critical to verify the identity of a user before you allow a password reset. Malicious users might exploit any weakness in the system to impersonate that user. Azure supports six different ways to authenticate reset requests.
+
+As an administrator, you choose the methods to use when you configure SSPR. Enable two or more of these methods so that users can choose the ones that they can use easily. The methods are:
+
+| Authentication method | How to register | How to authenticate for a password reset
+| - | - | - |
+| Mobile app notification | nstall the Microsoft Authenticator app on your mobile device, and then register it on the multifactor authentication setup page.| Azure sends a notification to the app, which you can either verify or deny.
+| Mobile app code | This method also uses the Authenticator app, and you install and register it in the same way.| Enter the code from the app.
+| Email | Provide an email address that's external to Azure and Microsoft 365.| Azure sends a code to the address, which you enter in the reset wizard.
+| Mobile phone | Provide a moblie phone number. | Azure sends a code to the phone in an SMS message, which you enter in the reset wizard. Or, you can choose to get an automated call.
+| Office phone | Provide a nonmobile phone number. | You receive an automated call to this number and press #.
+| Security questions | Select questions such as "In what city was your mother born?" and save responses to them.| Answer questions
+
+In free and trial Azure AD organizations, phone call options aren't supported.
+
+#### Require teh minimum number of authentication methods
+
+You can specify the minimum number of methods that the user must set up: one or two. For example, you might enable the mobile app code, email, office phone, and security questions methods and specify a minimum of two methods. Then users can choose the two methods they prefer, like mobile app code and email.
+
+For the security question method, you can specify a minimum number of questions that the user must set up to register for this method. You also can specify a minimum number of questions that they must answer correctly to reset their password.
+
+After your users register the required information for the minimum number of methods you've specified, they're considered registered for SSPR.
+
+#### Recommendations SSPR
+
+- Enable two or more of the authentication reset request methods.
+- Use the mobile app notification or code as the primary method, but also enable the email or office phone methods to support users without mobile devices.
+- The mobile phone method isn't a recommended method because it's possible to send fraudulent SMS messages.
+- The security question option is the least recommended method because the answers to the security questions might be known to other people. Only use the security question method in combination with at least one other method.
+
+#### Accounts associated with administrator roles
+
+- A strong, two-method authentication policy is always applied to accounts with an administrator role, regardless of your configuration for other users.
+- The security questions method isn't available to accounts that are associated with an administrator role.
+
+#### Configure notifications
+
+Administrators can choose how users are notified of password changes. There are two options that you can enable:
+
+- **Notify users on password resets:** The user who resets their own password is notified to their primary and secondary email addresses. If the reset was done by a malicious user, this notification alerts the user, who can take mitigation steps.
+- **Notify all admins when other admins reset their password:** All administrators are notified when another administrator resets their password.
+
+#### License requirements
+
+The editions of Azure AD are free, Premium P1, and Premium P2. The password reset functionality you can use depends on your edition.
+
+Any user who is signed in can change their password, regardless of the edition of Azure AD.
+
+If you're not signed in and you've forgotten your password or your password has expired, you can use SSPR in Azure AD Premium P1 or P2. It's also available with Microsoft 365 Apps for business or Microsoft 365.
+
+In a hybrid situation, where you have Active Directory on-premises and Azure AD in the cloud, any password change in the cloud must be written back to the on-premises directory. This writeback support is available in Azure AD Premium P1 or P2. It's also available with Microsoft 365 Apps for business.
+
+
