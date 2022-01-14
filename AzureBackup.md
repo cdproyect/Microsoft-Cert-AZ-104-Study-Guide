@@ -1,3 +1,4 @@
+
 - [Azure Backup](#azure-backup)
   - [Backup center](#backup-center)
   - [Recovery Services Vault](#recovery-services-vault)
@@ -133,4 +134,3 @@ This table summarizes teh Azure Backup (MARS) agent and the Azure backup server 
 Azure Storage now offers soft delete for blob objects so that you can more easily recover your data when it is erroneously modified or deleted by an application or other storage account user. Soft delete for VMs protects the backups of your VMs from unintended deletion. Even after the backups are deleted, they're preserved in soft-delete state for 14 additional days.
 
 [details here](https://docs.microsoft.com/en-gb/learn/modules/configure-virtual-machine-backups/9-manage-soft-delete)
-

@@ -19,6 +19,7 @@
     - [Management Groups](#management-groups)
       - [Adding management groups](#adding-management-groups)
     - [Implement Azure policies](#implement-azure-policies)
+      - [Use cases](#use-cases)
       - [Create Azure policies](#create-azure-policies)
       - [Create policy definitions](#create-policy-definitions)
       - [Create initiative definitions](#create-initiative-definitions)
@@ -47,6 +48,7 @@
       - [Accounts associated with administrator roles](#accounts-associated-with-administrator-roles)
       - [Configure notifications](#configure-notifications)
       - [License requirements](#license-requirements)
+ 
 # Manage Identifies and Governance in Azure
 
 ## User Accounts
@@ -78,7 +80,6 @@ There are different types of user accounts in Azure AD. Each type has a level of
 
 Your organization might need to work with an external partner. To collaborate with your organization, these partners often need to have a certain level of access to specific resources. For this sort of situation, it's a good idea to use guest user accounts. You'll then make sure partners have the right level of access to do their work, without having a higher level of access than they need.
 
-
 #### Create bulk user accounts
 
 Azure Active Directory (Azure AD) supports bulk user create and delete operations and supports downloading lists of users. Just fill out the comma-separated values (CSV) template. You can download the template from the Azure AD portal. To create users in the Azure portal, you must be signed in as a Global administrator or User administrator.
@@ -89,7 +90,7 @@ Consider:
 - **Passswords.** mplement a convention for the initial password of the newly created user. Figure out a way for the new users to receive their password in a secure way. Methods commonly used include generating a random password and emailing it to the new user or their manager.
 
 ---
-**Note**
+Note
 
 PowerShell is also available for buld user uploads.
 
@@ -235,7 +236,7 @@ Azure Policy will be important to you if your team runs an environment where you
 - Need to standardize/enforce how cloud resources are configured
 - Manage regulatory compliance, cost control, security, or design consistency
 
-**Use cases**
+#### Use cases
 
 - Specify the resource types that your organization can deploy.
 - Specify a set of virtual machine SKUs that your organization can deploy.
@@ -288,6 +289,7 @@ Access management for cloud resources is a critical function for any organizatio
 Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management of resources in Azure.
 
 ![azure-roles](img/azure-roles.png)
+
 #### Examples of what can you do with Azure roles
 
 Here are some examples of what you can do with Azure RBAC:
@@ -321,7 +323,6 @@ You control access to resources using Azure RBAC by creating role assignments, w
 1. Role definition (what you can do)
 1. Scope (where)
 
-
 ### Create a role definition
 
 Each role is a set of properties defined in a JSON file. This role definition includes Name, Id, and Description. The definition also includes the allowable permissions (Actions), denied permissions (NotActions), and scope (read access, etc.) for the role.
@@ -351,6 +352,7 @@ Example:
 * /subscriptions/[subscription id]/resourceGroupts/[resource group name]
 * /subscriptions/[subscription id]/resourceGroupts/[resource group name]/[resource]
 ```
+
 ### Create a role assignment
 
 A role assignment is the process of scoping a role definition to a user, group, service principal, or managed identity. The purpose of the role assignment is to grant access. Access is revoked by removing a role assignment.
@@ -359,12 +361,12 @@ For example, in the diagram, the Marketing group has been assigned the Contribut
 
 ![role-assignment](img/role-assignment.png)
 
-<span stype="color:red">---
+---
 Note
 
 A resource inherits role assignments from its parent resource.
 
----</span>
+---
 
 ### Compare Azure roles to Azure Active Directory roles
 
@@ -376,12 +378,12 @@ At a high level, Azure RBAC roles control permissions to manage Azure resources,
 |Scope can be specified at multiple levels (management group, subacription, resource group, resource)| Scope is at the tenant level
 | Role information can be accessed in Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager templates, REST API.| Role information can be accessed in Azure admin portal, Microsoft 365 admin portal, Microsoft Graph AzureAD PowerShell.
 
-<span stype="color:red">---
+---
 Note
 
 Azure Resource Manager roles should be used instead of Classic administrator roles.
 
----</span>
+---
 
 ### Apply role-based access control
 
@@ -477,5 +479,3 @@ Any user who is signed in can change their password, regardless of the edition o
 If you're not signed in and you've forgotten your password or your password has expired, you can use SSPR in Azure AD Premium P1 or P2. It's also available with Microsoft 365 Apps for business or Microsoft 365.
 
 In a hybrid situation, where you have Active Directory on-premises and Azure AD in the cloud, any password change in the cloud must be written back to the on-premises directory. This writeback support is available in Azure AD Premium P1 or P2. It's also available with Microsoft 365 Apps for business.
-
-

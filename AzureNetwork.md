@@ -95,6 +95,7 @@
       - [Back-end pools](#back-end-pools)
       - [Web application firewall](#web-application-firewall)
       - [Health process](#health-process)
+  
 # Azure Networking
 
 Azure networking components offer a range of functionalities and services.

@@ -1,9 +1,11 @@
 - [Azure Alerts](#azure-alerts)
   - [Alert rules](#alert-rules)
+    - [Signal types](#signal-types)
   - [Action Groups](#action-groups)
     - [Notifications](#notifications)
     - [Actions](#actions)
-  
+  - [Tutorials](#tutorials)
+ 
 # Azure Alerts
 
 Benefits:
@@ -36,7 +38,19 @@ Alert rules are separated from alerts and the actions that are taken when an ale
 - **Alert Name** – A specific name for the alert rule configured by the user.
 - **Alert Description** – A description for the alert rule configured by the user.
 - **Severity** – The severity of the alert once the criteria specified in the alert rule is met. Severity can range from 0 to 4.
+  - 0: Critical
+  - 1: Error
+  - 2: Warning
+  - 3: Informational
+  - 4: Verbose
+
 - **Action** – A specific action taken when the alert is fired.
+
+### Signal types
+
+- **Metric** alerts provide an alert trigger when a specified threshold is exceeded. For example, a metric alert can notify you when CPU usage is greater than 95 percent.
+- **Activity log** alerts notify you when Azure resources change state. For example, an activity log alert can notify you when a resource is deleted.
+- **Log** alerts are based on things written to log files. For example, a log alert can notify you when a web server has returned a number of 404 or 500 responses.
 
 ## Action Groups
 
@@ -58,3 +72,8 @@ Actions configure the method in which actions are performed when the action grou
 - **ITSM** – Connect Azure and a supported IT Service Management (ITSM) product/service. This requires an ITSM Connection.
 - **Logic App** – Logic apps connect your business-critical apps and services by automating your workflows.
 - **Webhook** – A webhook is a HTTPS or HTTP endpoint that allows external applications to communicate with your system.
+
+## Tutorials
+
+[Use this link](https://docs.microsoft.com/en-gb/learn/modules/incident-response-with-alerting-on-azure/4-exercise-metric-alerts) to use an Azure lab to learn more on how to use metrica alerts.
+
